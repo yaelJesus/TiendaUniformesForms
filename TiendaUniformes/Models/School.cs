@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TiendaUniformesAPI.Models;
+namespace TiendaUniformes.Models;
 
 public partial class School : BaseEntity
 {

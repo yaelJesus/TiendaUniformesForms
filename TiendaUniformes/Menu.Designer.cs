@@ -34,9 +34,9 @@
             btnCustomers = new Button();
             btnGarments = new Button();
             btnSchools = new Button();
-            button3 = new Button();
+            btnInventory = new Button();
             btnSizes = new Button();
-            button5 = new Button();
+            btnOrders = new Button();
             toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)btnLogOut).BeginInit();
             SuspendLayout();
@@ -75,6 +75,7 @@
             btnGarments.TabIndex = 7;
             btnGarments.Text = "&Prendas";
             btnGarments.UseVisualStyleBackColor = true;
+            btnGarments.Click += btnGarments_Click;
             // 
             // btnSchools
             // 
@@ -88,16 +89,17 @@
             btnSchools.UseVisualStyleBackColor = true;
             btnSchools.Click += btnSchools_Click;
             // 
-            // button3
+            // btnInventory
             // 
-            button3.FlatStyle = FlatStyle.Popup;
-            button3.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.Location = new Point(161, 90);
-            button3.Name = "button3";
-            button3.Size = new Size(95, 35);
-            button3.TabIndex = 9;
-            button3.Text = "&Inventario";
-            button3.UseVisualStyleBackColor = true;
+            btnInventory.FlatStyle = FlatStyle.Popup;
+            btnInventory.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnInventory.Location = new Point(161, 90);
+            btnInventory.Name = "btnInventory";
+            btnInventory.Size = new Size(95, 35);
+            btnInventory.TabIndex = 9;
+            btnInventory.Text = "&Inventario";
+            btnInventory.UseVisualStyleBackColor = true;
+            btnInventory.Click += btnInventory_Click;
             // 
             // btnSizes
             // 
@@ -109,17 +111,19 @@
             btnSizes.TabIndex = 10;
             btnSizes.Text = "&Tallas";
             btnSizes.UseVisualStyleBackColor = true;
+            btnSizes.Click += btnSizes_Click;
             // 
-            // button5
+            // btnOrders
             // 
-            button5.FlatStyle = FlatStyle.Popup;
-            button5.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button5.Location = new Point(290, 90);
-            button5.Name = "button5";
-            button5.Size = new Size(95, 35);
-            button5.TabIndex = 11;
-            button5.Text = "&Ordenes";
-            button5.UseVisualStyleBackColor = true;
+            btnOrders.FlatStyle = FlatStyle.Popup;
+            btnOrders.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnOrders.Location = new Point(290, 90);
+            btnOrders.Name = "btnOrders";
+            btnOrders.Size = new Size(95, 35);
+            btnOrders.TabIndex = 11;
+            btnOrders.Text = "&Ordenes";
+            btnOrders.UseVisualStyleBackColor = true;
+            btnOrders.Click += btnOrders_Click;
             // 
             // Menu
             // 
@@ -127,14 +131,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(437, 186);
             ControlBox = false;
-            Controls.Add(button5);
+            Controls.Add(btnOrders);
             Controls.Add(btnSizes);
-            Controls.Add(button3);
+            Controls.Add(btnInventory);
             Controls.Add(btnSchools);
             Controls.Add(btnGarments);
             Controls.Add(btnLogOut);
             Controls.Add(btnCustomers);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "Menu";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Menu";
             ((System.ComponentModel.ISupportInitialize)btnLogOut).EndInit();
             ResumeLayout(false);
@@ -145,9 +151,9 @@
         private Button btnCustomers;
         private Button btnGarments;
         private Button btnSchools;
-        private Button button3;
+        private Button btnInventory;
         private Button btnSizes;
-        private Button button5;
+        private Button btnOrders;
         private ToolTip toolTip1;
     }
 }

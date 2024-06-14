@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TiendaUniformes.ApiRest;
-using TiendaUniformesAPI.Models;
+using TiendaUniformes.Models;
 
 namespace TiendaUniformes
 {
@@ -61,7 +61,8 @@ namespace TiendaUniformes
                 };
                 string json = JsonConvert.SerializeObject(user);
 
-                dynamic respuesta = dBApi.Post("http://192.168.100.17/api/User/Register", json);
+                //dynamic respuesta = dBApi.Post("User", "Register", json);
+                dynamic respuesta = dBApi.Post("User", "Register", json);
 
                 if (respuesta.status == 200)
                 {

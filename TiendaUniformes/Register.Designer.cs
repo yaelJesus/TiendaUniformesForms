@@ -43,14 +43,14 @@
             // 
             // txtMail
             // 
-            txtMail.Location = new Point(13, 89);
+            txtMail.Location = new Point(13, 79);
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(205, 23);
             txtMail.TabIndex = 9;
             // 
             // txtUser
             // 
-            txtUser.Location = new Point(12, 39);
+            txtUser.Location = new Point(12, 29);
             txtUser.Name = "txtUser";
             txtUser.Size = new Size(207, 23);
             txtUser.TabIndex = 8;
@@ -58,7 +58,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 71);
+            label2.Location = new Point(12, 61);
             label2.Name = "label2";
             label2.Size = new Size(43, 15);
             label2.TabIndex = 7;
@@ -67,7 +67,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 21);
+            label1.Location = new Point(12, 11);
             label1.Name = "label1";
             label1.Size = new Size(47, 15);
             label1.TabIndex = 6;
@@ -76,7 +76,7 @@
             // btnRegister
             // 
             btnRegister.FlatStyle = FlatStyle.Popup;
-            btnRegister.Location = new Point(74, 231);
+            btnRegister.Location = new Point(78, 217);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(75, 23);
             btnRegister.TabIndex = 5;
@@ -86,22 +86,24 @@
             // 
             // txtPassC
             // 
-            txtPassC.Location = new Point(13, 192);
+            txtPassC.Location = new Point(13, 182);
             txtPassC.Name = "txtPassC";
+            txtPassC.PasswordChar = '•';
             txtPassC.Size = new Size(205, 23);
             txtPassC.TabIndex = 13;
             // 
             // txtPass
             // 
-            txtPass.Location = new Point(12, 142);
+            txtPass.Location = new Point(12, 132);
             txtPass.Name = "txtPass";
+            txtPass.PasswordChar = '•';
             txtPass.Size = new Size(207, 23);
             txtPass.TabIndex = 12;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 174);
+            label3.Location = new Point(12, 164);
             label3.Name = "label3";
             label3.Size = new Size(122, 15);
             label3.TabIndex = 11;
@@ -110,7 +112,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 124);
+            label4.Location = new Point(12, 114);
             label4.Name = "label4";
             label4.Size = new Size(67, 15);
             label4.TabIndex = 10;
@@ -124,7 +126,7 @@
             btnBack.FlatStyle = FlatStyle.Flat;
             btnBack.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnBack.Image = (Image)resources.GetObject("btnBack.Image");
-            btnBack.Location = new Point(12, 229);
+            btnBack.Location = new Point(13, 212);
             btnBack.Name = "btnBack";
             btnBack.Size = new Size(30, 30);
             btnBack.TabIndex = 14;
@@ -135,7 +137,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(229, 271);
+            ClientSize = new Size(229, 252);
             ControlBox = false;
             Controls.Add(btnBack);
             Controls.Add(txtPassC);
@@ -147,7 +149,9 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnRegister);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "Register";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Registro";
             ResumeLayout(false);
             PerformLayout();

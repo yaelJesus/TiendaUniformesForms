@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SchoolView));
-            dgSchoolsList = new DataGridView();
+            dgList = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             btnNuevo = new Button();
@@ -38,20 +38,20 @@
             btnBorrar = new Button();
             toolTip1 = new ToolTip(components);
             btnBack = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgSchoolsList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgList).BeginInit();
             SuspendLayout();
             // 
-            // dgSchoolsList
+            // dgList
             // 
-            dgSchoolsList.AllowUserToAddRows = false;
-            dgSchoolsList.AllowUserToDeleteRows = false;
-            dgSchoolsList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgSchoolsList.Columns.AddRange(new DataGridViewColumn[] { Id, Nombre });
-            dgSchoolsList.Location = new Point(12, 12);
-            dgSchoolsList.Name = "dgSchoolsList";
-            dgSchoolsList.ReadOnly = true;
-            dgSchoolsList.Size = new Size(412, 277);
-            dgSchoolsList.TabIndex = 3;
+            dgList.AllowUserToAddRows = false;
+            dgList.AllowUserToDeleteRows = false;
+            dgList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgList.Columns.AddRange(new DataGridViewColumn[] { Id, Nombre });
+            dgList.Location = new Point(12, 12);
+            dgList.Name = "dgList";
+            dgList.ReadOnly = true;
+            dgList.Size = new Size(412, 277);
+            dgList.TabIndex = 3;
             // 
             // Id
             // 
@@ -90,6 +90,7 @@
             btnEditar.TabIndex = 5;
             btnEditar.Text = "&Editar";
             btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnBorrar
             // 
@@ -101,6 +102,7 @@
             btnBorrar.TabIndex = 6;
             btnBorrar.Text = "&Eliminar";
             btnBorrar.UseVisualStyleBackColor = true;
+            btnBorrar.Click += btnBorrar_Click;
             // 
             // btnBack
             // 
@@ -128,16 +130,18 @@
             Controls.Add(btnBorrar);
             Controls.Add(btnEditar);
             Controls.Add(btnNuevo);
-            Controls.Add(dgSchoolsList);
+            Controls.Add(dgList);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "SchoolView";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Escuelas";
-            ((System.ComponentModel.ISupportInitialize)dgSchoolsList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgList).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dgSchoolsList;
+        private DataGridView dgList;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Nombre;
         private Button btnNuevo;

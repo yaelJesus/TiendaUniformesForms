@@ -1,8 +1,7 @@
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using TiendaUniformes.ApiRest;
-using TiendaUniformes.School;
-using TiendaUniformesAPI.Models;
+using TiendaUniformes.Models;
 
 namespace TiendaUniformes
 {
@@ -30,14 +29,15 @@ namespace TiendaUniformes
 
                 string json = JsonConvert.SerializeObject(user);
 
-                dynamic respuesta = dBApi.Post("http://192.168.100.17/api/User/Login", json);
+                //dynamic respuesta = dBApi.Post("User", "Login", json);
+                dynamic respuesta = dBApi.Post("User", "Login", json);
 
                 if (respuesta.status == 200)
                 {
-                    Menu view = new Menu();
+                    Menu menu = new Menu();
                     this.Hide();
-                    view.User = respuesta.data.idU;
-                    view.Show();
+                    menu.User = respuesta.data.idU;
+                    menu.Show();
                 }
                 else
                 {

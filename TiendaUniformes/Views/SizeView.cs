@@ -13,11 +13,11 @@ using TiendaUniformes.Models;
 
 namespace TiendaUniformes.Views
 {
-    public partial class SchoolView : Form
+    public partial class SizeView : Form
     {
         DBApi dBApi = new DBApi();
         private int user = 0;
-        public SchoolView(int id)
+        public SizeView(int id)
         {
             InitializeComponent();
             user = id;
@@ -28,15 +28,16 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                dynamic respuesta = dBApi.Get("School", "GetSchool?IdU=" + user);
+                dynamic respuesta = dBApi.Get("Size", "GetSizes?IdU=" + user);
                 dgList.Rows.Clear();
                 foreach (var item in respuesta.data)
                 {
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(dgList);
 
-                    row.Cells[0].Value = item.idSc;
-                    row.Cells[1].Value = item.name;
+                    row.Cells[0].Value = item.idS;
+                    row.Cells[1].Value = item.size1;
+                    row.Cells[2].Value = item.price;
                     dgList.Rows.Add(row);
                 }
             }
@@ -48,19 +49,20 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                SchoolCM nuevo = new SchoolCM();
-                if (nuevo.ShowDialog() == DialogResult.Cancel)
+                SizeCM nuevo = new SizeCM();
+                if (nuevo.ShowDialog() == DialogResult.Cancel || string.IsNullOrEmpty(nuevo.Talla.ToString()))
                     return;
 
-                School school = new School
+                Models.Size size = new Models.Size()
                 {
-                    name = nuevo.Nombre,
+                    size1 = nuevo.Talla,
+                    price = nuevo.Presio,
                     createUser = user
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(size);
 
-                dynamic respuesta = dBApi.Post("School", "CreateSchool", json);
+                dynamic respuesta = dBApi.Post("Size", "CreateSize", json);
 
                 if (respuesta.status == 200)
                 {
@@ -84,9 +86,10 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                SchoolCM nuevo = new SchoolCM();
-                var nombre = dgList.CurrentRow.Cells[1].Value.ToString();
-                nuevo.NameBtn(true, nombre!);
+                SizeCM nuevo = new SizeCM();
+                var talla = dgList.CurrentRow.Cells[1].Value.ToString();
+                var presio = dgList.CurrentRow.Cells[2].Value.ToString();
+                nuevo.NameBtn(true, talla!, presio!);
                 if (nuevo.ShowDialog() == DialogResult.Cancel)
                     return;
 
@@ -94,16 +97,17 @@ namespace TiendaUniformes.Views
                 if (a == "0")
                     return;
 
-                School school = new School
+                Models.Size size = new Models.Size
                 {
-                    idSc = int.Parse(a!),
-                    name = nuevo.Nombre,
-                    createUser = user
+                    idS = int.Parse(a!),
+                    size1 = nuevo.Talla,
+                    price = nuevo.Presio,
+                    modifyUser = user
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(size);
 
-                dynamic respuesta = dBApi.Post("School", "UpdateSchool", json);
+                dynamic respuesta = dBApi.Post("Size", "UpdateSize", json);
 
                 if (respuesta.status == 200)
                 {
@@ -128,21 +132,21 @@ namespace TiendaUniformes.Views
             try
             {
                 var x = dgList.CurrentRow.Cells[1].Value.ToString();
-                if (MessageBox.Show("¿Estas seguro que deseas eliminar a " + x + "?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                if (MessageBox.Show("¿Estas seguro que deseas eliminar la talla " + x + "?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                     return;
 
                 var a = dgList.CurrentRow.Cells[0].Value.ToString();
                 if (a == "0")
                     return;
 
-                School school = new School
+                Models.Size size = new Models.Size
                 {
-                    idSc = int.Parse(a!)
+                    idS = int.Parse(a!)
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(size);
 
-                dynamic respuesta = dBApi.Post("School", "DeleteSchool?idSc=" + a, json);
+                dynamic respuesta = dBApi.Post("Size", "DeleteSize?idS=" + a, json);
 
                 if (respuesta.status == 200)
                 {

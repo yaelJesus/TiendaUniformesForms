@@ -13,11 +13,11 @@ using TiendaUniformes.Models;
 
 namespace TiendaUniformes.Views
 {
-    public partial class SchoolView : Form
+    public partial class CustomerView : Form
     {
         DBApi dBApi = new DBApi();
         private int user = 0;
-        public SchoolView(int id)
+        public CustomerView(int id)
         {
             InitializeComponent();
             user = id;
@@ -28,15 +28,16 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                dynamic respuesta = dBApi.Get("School", "GetSchool?IdU=" + user);
+                dynamic respuesta = dBApi.Get("Customer", "GetCustomer?IdU=" + user);
                 dgList.Rows.Clear();
                 foreach (var item in respuesta.data)
                 {
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(dgList);
 
-                    row.Cells[0].Value = item.idSc;
+                    row.Cells[0].Value = item.idC;
                     row.Cells[1].Value = item.name;
+                    row.Cells[2].Value = item.phone;
                     dgList.Rows.Add(row);
                 }
             }
@@ -48,19 +49,20 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                SchoolCM nuevo = new SchoolCM();
-                if (nuevo.ShowDialog() == DialogResult.Cancel)
+                CustomerCM nuevo = new CustomerCM();
+                if (nuevo.ShowDialog() == DialogResult.Cancel || string.IsNullOrEmpty(nuevo.Nombre))
                     return;
 
-                School school = new School
+                Customer customer = new Customer
                 {
                     name = nuevo.Nombre,
+                    phone = nuevo.Phone,
                     createUser = user
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(customer);
 
-                dynamic respuesta = dBApi.Post("School", "CreateSchool", json);
+                dynamic respuesta = dBApi.Post("Customer", "CreateCustomer", json);
 
                 if (respuesta.status == 200)
                 {
@@ -84,9 +86,10 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                SchoolCM nuevo = new SchoolCM();
+                CustomerCM nuevo = new CustomerCM();
                 var nombre = dgList.CurrentRow.Cells[1].Value.ToString();
-                nuevo.NameBtn(true, nombre!);
+                var phone = dgList.CurrentRow.Cells[2].Value.ToString();
+                nuevo.NameBtn(true, nombre!, phone!);
                 if (nuevo.ShowDialog() == DialogResult.Cancel)
                     return;
 
@@ -94,16 +97,17 @@ namespace TiendaUniformes.Views
                 if (a == "0")
                     return;
 
-                School school = new School
+                Customer customer = new Customer
                 {
-                    idSc = int.Parse(a!),
+                    idC = int.Parse(a!),
                     name = nuevo.Nombre,
-                    createUser = user
+                    phone = nuevo.Phone,
+                    modifyUser = user
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(customer);
 
-                dynamic respuesta = dBApi.Post("School", "UpdateSchool", json);
+                dynamic respuesta = dBApi.Post("Customer", "UpdateCustomer", json);
 
                 if (respuesta.status == 200)
                 {
@@ -135,14 +139,14 @@ namespace TiendaUniformes.Views
                 if (a == "0")
                     return;
 
-                School school = new School
+                Customer customer = new Customer
                 {
-                    idSc = int.Parse(a!)
+                    idC = int.Parse(a!)
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(customer);
 
-                dynamic respuesta = dBApi.Post("School", "DeleteSchool?idSc=" + a, json);
+                dynamic respuesta = dBApi.Post("Customer", "DeleteCustomer?idC=" + a, json);
 
                 if (respuesta.status == 200)
                 {

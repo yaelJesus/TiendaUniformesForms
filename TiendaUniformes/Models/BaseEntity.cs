@@ -1,4 +1,4 @@
-﻿namespace TiendaUniformesAPI.Models
+﻿namespace TiendaUniformes.Models
 {
     public class BaseEntity
     {

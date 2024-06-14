@@ -13,11 +13,11 @@ using TiendaUniformes.Models;
 
 namespace TiendaUniformes.Views
 {
-    public partial class SchoolView : Form
+    public partial class GarmentView : Form
     {
         DBApi dBApi = new DBApi();
         private int user = 0;
-        public SchoolView(int id)
+        public GarmentView(int id)
         {
             InitializeComponent();
             user = id;
@@ -28,15 +28,18 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                dynamic respuesta = dBApi.Get("School", "GetSchool?IdU=" + user);
+                dynamic respuesta = dBApi.Get("Garment", "GetGarment?IdU=" + user);
                 dgList.Rows.Clear();
                 foreach (var item in respuesta.data)
                 {
                     DataGridViewRow row = new DataGridViewRow();
                     row.CreateCells(dgList);
 
-                    row.Cells[0].Value = item.idSc;
-                    row.Cells[1].Value = item.name;
+                    row.Cells[0].Value = item.idG;
+                    row.Cells[1].Value = item.type;
+                    row.Cells[2].Value = item.desctiption;
+                    row.Cells[3].Value = item.idS;
+                    row.Cells[4].Value = item.idSc;
                     dgList.Rows.Add(row);
                 }
             }
@@ -48,19 +51,22 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                SchoolCM nuevo = new SchoolCM();
-                if (nuevo.ShowDialog() == DialogResult.Cancel)
+                GarmentCM nuevo = new GarmentCM();
+                if (nuevo.ShowDialog() == DialogResult.Cancel || string.IsNullOrEmpty(nuevo.Type))
                     return;
 
-                School school = new School
+                Garment garment = new Garment
                 {
-                    name = nuevo.Nombre,
+                    type = nuevo.Type,
+                    desctiption = nuevo.Desc,
+                    idS = nuevo.IdS,
+                    idSc = nuevo.IdSc,
                     createUser = user
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(garment);
 
-                dynamic respuesta = dBApi.Post("School", "CreateSchool", json);
+                dynamic respuesta = dBApi.Post("Garment", "CreateGarment", json);
 
                 if (respuesta.status == 200)
                 {
@@ -84,9 +90,12 @@ namespace TiendaUniformes.Views
         {
             try
             {
-                SchoolCM nuevo = new SchoolCM();
-                var nombre = dgList.CurrentRow.Cells[1].Value.ToString();
-                nuevo.NameBtn(true, nombre!);
+                GarmentCM nuevo = new GarmentCM();
+                var tipo = dgList.CurrentRow.Cells[1].Value.ToString();
+                var desc = dgList.CurrentRow.Cells[2].Value.ToString();
+                var ids = dgList.CurrentRow.Cells[3].Value.ToString();
+                var idsc = dgList.CurrentRow.Cells[4].Value.ToString();
+                nuevo.NameBtn(true, tipo!, ids!, idsc!, desc!);
                 if (nuevo.ShowDialog() == DialogResult.Cancel)
                     return;
 
@@ -94,16 +103,19 @@ namespace TiendaUniformes.Views
                 if (a == "0")
                     return;
 
-                School school = new School
+                Garment customer = new Garment
                 {
-                    idSc = int.Parse(a!),
-                    name = nuevo.Nombre,
-                    createUser = user
+                    idG = int.Parse(a!),
+                    type = nuevo.Type,
+                    desctiption = nuevo.Desc,
+                    idS = nuevo.IdS,
+                    idSc = nuevo.IdSc,
+                    modifyUser = user
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(customer);
 
-                dynamic respuesta = dBApi.Post("School", "UpdateSchool", json);
+                dynamic respuesta = dBApi.Post("Garment", "UpdateGarment", json);
 
                 if (respuesta.status == 200)
                 {
@@ -135,14 +147,14 @@ namespace TiendaUniformes.Views
                 if (a == "0")
                     return;
 
-                School school = new School
+                Garment customer = new Garment
                 {
-                    idSc = int.Parse(a!)
+                    idG = int.Parse(a!)
                 };
 
-                string json = JsonConvert.SerializeObject(school);
+                string json = JsonConvert.SerializeObject(customer);
 
-                dynamic respuesta = dBApi.Post("School", "DeleteSchool?idSc=" + a, json);
+                dynamic respuesta = dBApi.Post("Garment", "DeleteGarment?idG=" + a, json);
 
                 if (respuesta.status == 200)
                 {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TiendaUniformes.School;
+using TiendaUniformes.Views;
 
 namespace TiendaUniformes
 {
@@ -35,12 +35,47 @@ namespace TiendaUniformes
 
         private void btnCustomers_Click(object sender, EventArgs e)
         {
-
+            CustomerView view = new CustomerView(user);
+            Hide();
+            if (view.ShowDialog() == DialogResult.Cancel)
+                Show();
         }
 
         private void btnSchools_Click(object sender, EventArgs e)
         {
             SchoolView view = new SchoolView(user);
+            Hide();
+            if (view.ShowDialog() == DialogResult.Cancel)
+                Show();
+        }
+
+        private void btnSizes_Click(object sender, EventArgs e)
+        {
+            SizeView view = new SizeView(user);
+            Hide();
+            if (view.ShowDialog() == DialogResult.Cancel)
+                Show();
+        }
+
+        private void btnGarments_Click(object sender, EventArgs e)
+        {
+            GarmentView view = new GarmentView(user);
+            Hide();
+            if (view.ShowDialog() == DialogResult.Cancel)
+                Show();
+        }
+
+        private void btnInventory_Click(object sender, EventArgs e)
+        {
+            InventoryView view = new InventoryView(user);
+            Hide();
+            if (view.ShowDialog() == DialogResult.Cancel)
+                Show();
+        }
+
+        private void btnOrders_Click(object sender, EventArgs e)
+        {
+            OrderView view = new OrderView(user);
             Hide();
             if (view.ShowDialog() == DialogResult.Cancel)
                 Show();

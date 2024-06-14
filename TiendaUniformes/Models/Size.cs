@@ -1,4 +1,4 @@
-﻿namespace TiendaUniformesAPI.Models;
+﻿namespace TiendaUniformes.Models;
 
 public partial class Size : BaseEntity
 {
@@ -6,5 +6,5 @@ public partial class Size : BaseEntity
 
     public int size1 { get; set; }
 
-    public decimal Price { get; set; }
+    public decimal price { get; set; }
 }

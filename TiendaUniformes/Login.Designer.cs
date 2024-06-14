@@ -43,7 +43,7 @@
             // btnLogin
             // 
             btnLogin.FlatStyle = FlatStyle.Popup;
-            btnLogin.Location = new Point(78, 129);
+            btnLogin.Location = new Point(78, 136);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(75, 23);
             btnLogin.TabIndex = 0;
@@ -80,6 +80,7 @@
             // 
             txtPass.Location = new Point(13, 98);
             txtPass.Name = "txtPass";
+            txtPass.PasswordChar = '•';
             txtPass.Size = new Size(205, 23);
             txtPass.TabIndex = 4;
             // 
@@ -106,7 +107,7 @@
             // btnLogOut
             // 
             btnLogOut.Image = (Image)resources.GetObject("btnLogOut.Image");
-            btnLogOut.Location = new Point(193, 208);
+            btnLogOut.Location = new Point(194, 194);
             btnLogOut.Name = "btnLogOut";
             btnLogOut.Size = new Size(25, 25);
             btnLogOut.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -118,7 +119,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(229, 245);
+            ClientSize = new Size(229, 227);
             ControlBox = false;
             Controls.Add(btnLogOut);
             Controls.Add(btnRegister);
@@ -128,7 +129,9 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnLogin);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "Login";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Inicio de Sesión";
             ((System.ComponentModel.ISupportInitialize)btnLogOut).EndInit();
             ResumeLayout(false);
